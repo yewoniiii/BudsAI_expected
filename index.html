@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BudsAI Expected Effects</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #e8eef7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      color: #111827;
+    }
+    .deck {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      padding: 40px;
+      align-items: center;
+    }
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, #f8fbff 0%, #eef6ff 100%);
+      border-radius: 30px;
+      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.18);
+      padding: 54px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide::before {
+      content: "";
+      position: absolute;
+      top: -170px;
+      right: -120px;
+      width: 430px;
+      height: 430px;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.10);
+    }
+    .slide::after {
+      content: "";
+      position: absolute;
+      bottom: -150px;
+      left: -120px;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: rgba(14, 165, 233, 0.10);
+    }
+    .content { position: relative; z-index: 1; }
+    .label {
+      font-size: 17px;
+      font-weight: 800;
+      color: #2563eb;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 39px;
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+    }
+    .subtitle {
+      margin-top: 13px;
+      font-size: 20px;
+      color: #4b5563;
+      font-weight: 500;
+    }
+    .hero {
+      margin-top: 34px;
+      padding: 22px 28px;
+      border-radius: 24px;
+      background: #111827;
+      color: white;
+      font-size: 25px;
+      font-weight: 850;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .hero small {
+      display: block;
+      margin-top: 6px;
+      font-size: 17px;
+      color: #cbd5e1;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1.35;
+    }
+    .badge {
+      flex: none;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      padding: 12px 18px;
+      font-size: 18px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .grid3 {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .card {
+      min-height: 255px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 2px solid #dbeafe;
+      border-radius: 28px;
+      padding: 26px 24px;
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+    }
+    .icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #2563eb, #38bdf8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 28px;
+      margin-bottom: 18px;
+    }
+    .card h2 {
+      margin: 0 0 12px;
+      font-size: 25px;
+      letter-spacing: -0.03em;
+    }
+    .card p {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.48;
+      color: #475569;
+      font-weight: 500;
+    }
+    .impact-row {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: 1.25fr 1fr 1.25fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .phase {
+      background: white;
+      border-radius: 26px;
+      padding: 24px 24px;
+      border: 2px solid #e0e7ff;
+      min-height: 320px;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+    }
+    .phase h2 {
+      margin: 0 0 15px;
+      font-size: 27px;
+      letter-spacing: -0.03em;
+    }
+    .phase ul {
+      margin: 0;
+      padding-left: 22px;
+      font-size: 18px;
+      line-height: 1.68;
+      color: #475569;
+      font-weight: 550;
+    }
+    .connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #2563eb;
+      font-weight: 900;
+      font-size: 24px;
+      gap: 18px;
+    }
+    .circle {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      font-size: 21px;
+      line-height: 1.25;
+      box-shadow: 0 18px 35px rgba(37, 99, 235, 0.22);
+    }
+    .arrow { font-size: 44px; }
+    .bottom-message {
+      position: absolute;
+      left: 64px;
+      right: 64px;
+      bottom: 45px;
+      border-radius: 22px;
+      background: #eff6ff;
+      border-left: 8px solid #2563eb;
+      padding: 18px 24px;
+      font-size: 21px;
+      font-weight: 850;
+      color: #1e3a8a;
+      z-index: 2;
+    }
+    .note {
+      color: #64748b;
+      font-size: 15px;
+      margin-top: 14px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="slide">
+      <div class="content">
+        <div class="label">Expected Effects 01</div>
+        <h1>사용성 개선 효과: “방금 들은 소리”를 바로 이해하고 실행으로 연결</h1>
+        <div class="subtitle">BudsAI는 사용자가 놓친 청각 정보를 다시 찾고, 답변을 넘어 다음 행동까지 이어주는 경험을 제공한다.</div>
+
+        <div class="hero">
+          <div>
+            기존 음성비서가 “사용자의 발화”만 이해했다면,<br />BudsAI는 <b>직전 청각 맥락 + 현재 질문</b>을 함께 이해한다.
+            <small>사용자는 앱을 열거나 검색어를 직접 입력하지 않아도, 버즈에서 바로 질문하고 결과를 받을 수 있음</small>
+          </div>
+          <div class="badge">Hands-free · Context-aware</div>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <div class="icon">↺</div>
+            <h2>놓친 정보 회복</h2>
+            <p>“방금 뭐라고 했어?”, “이 노래 뭐야?”처럼 순간적으로 지나간 소리도 직전 버퍼 기반으로 다시 확인할 수 있다.</p>
+          </div>
+          <div class="card">
+            <div class="icon">⚡</div>
+            <h2>탐색 단계 단축</h2>
+            <p>음악 검색, 번역, 요약, 일정 추출을 별도 앱 전환 없이 처리해 사용자의 조작 부담과 탐색 시간을 줄인다.</p>
+          </div>
+          <div class="card">
+            <div class="icon">✓</div>
+            <h2>답변에서 실행까지</h2>
+            <p>Galaxy에서는 분석 결과를 Action Item으로 제공해 음악 열기, 일정 등록, 알림 설정 등 후속 행동으로 연결한다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="content">
+        <div class="label">Expected Effects 02</div>
+        <h1>당사 제품군 확대 적용 효과</h1>
+        <div class="subtitle">BudsAI를 Buds 단일 기능이 아닌 Galaxy 생태계 확장형 Audio AI 경험으로 적용</div>
+
+        <style>
+          .product-grid {
+            margin-top: 28px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+          }
+          .product-card {
+            background: rgba(255,255,255,0.94);
+            border: 2px solid #dbeafe;
+            border-radius: 24px;
+            padding: 22px 22px;
+            min-height: 180px;
+            box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+          }
+          .product-card.wide {
+            grid-column: span 2;
+          }
+          .product-card h2 {
+            margin: 0 0 12px;
+            font-size: 23px;
+            letter-spacing: -0.03em;
+            color: #111827;
+          }
+          .product-card p {
+            margin: 0;
+            font-size: 17px;
+            line-height: 1.45;
+            color: #475569;
+            font-weight: 560;
+          }
+          .product-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            margin-bottom: 13px;
+            font-weight: 900;
+          }
+          .source-note {
+            position: absolute;
+            left: 64px;
+            bottom: 18px;
+            font-size: 13px;
+            color: #94a3b8;
+            z-index: 3;
+          }
+        </style>
+
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="product-icon">B</div>
+            <h2>Buds 라인업 가치 상승</h2>
+            <p>Buds3/Buds Pro 후속 모델의 핵심 차별화 기능으로 탑재 가능 → 단순 무선 이어폰을 "AI 청취 어시스턴트"로 포지셔닝 전환.</p>
+          </div>
+
+          <div class="product-card">
+            <div class="product-icon">G</div>
+            <h2>Galaxy 생태계 락인 강화</h2>
+            <p>Galaxy 폰·워치·태블릿·TV·차량(One UI Auto)에 컴패니언 레이어 확장 시 "삼성을 쓰면 BudsAI가 더 똑똑하게 동작" 차별점 확보 → Galaxy 구매 동인.</p>
+          </div>
+
+          <div class="product-card">
+            <div class="product-icon">S</div>
+            <h2>Bixby·SmartThings 재활성화</h2>
+            <p>기존 자산(Bixby NLU, SmartThings, Wearable) 재사용 → 신규 인프라 투자 최소.</p>
+          </div>
+
+          <div class="product-card">
+            <div class="product-icon">↔</div>
+            <h2>타사 호환을 통한 저변 확대</h2>
+            <p>비-Galaxy 호스트도 동작 → 진입 마찰 0, 호환 버즈 확산 시 즉시 활용. 이후 Galaxy 특화 UX로 자연스러운 업셀.</p>
+          </div>
+
+          <div class="product-card">
+            <div class="product-icon">＋</div>
+            <h2>새 호환 기기 즉시 적용</h2>
+            <p>표준 BT PAN 기반이라 향후 출시되는 갤럭시 차량·TV·웨어러블 등 BT+인터넷 가능한 모든 신제품에 추가 개발 없이 적용 가능.</p>
+          </div>
+
+          <div class="product-card">
+            <div class="product-icon">D</div>
+            <h2>데이터 자산화</h2>
+            <p>(사용자 동의 하) 음성 의도 분류·환경음 인식 데이터 축적 → 향후 온디바이스 AI 모델 학습 자원.</p>
+          </div>
+        </div>
+      </div>
+      <div class="source-note">Source: proposal.html#impact — 기대효과 B. 당사 제품군 확대 적용 효과</div>
+    </section>
+  </main>
+</body>
+</html>
