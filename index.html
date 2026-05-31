@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BudsAI · 기술 아이디어 요약</title>
+<title>BudsAI Q · 기술 아이디어 요약</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -68,6 +68,15 @@
   }
   .tag.lt{ background:#EAF0FF; border:1px solid var(--teal); color:#1C6E8C; }
   .tag.dk{ background:var(--navy3); border:1px solid var(--mint); color:var(--mint); }
+
+  /* naming legend (slide 1) */
+  .legend{ display:flex; gap:1.1cqw; margin-top:1.4cqw; flex-wrap:wrap; }
+  .lg{ display:flex; align-items:center; gap:.6cqw; background:var(--navy2); border:1px solid #2E3A6E;
+       border-radius:10px; padding:.7cqw 1cqw; }
+  .lg .lk{ font-family:var(--mono); font-size:.95cqw; letter-spacing:.04em; color:var(--slate);
+           border-right:1px solid #33407A; padding-right:.6cqw; }
+  .lg b{ font-size:1.45cqw; color:var(--mint); font-weight:700; }
+  .lg i{ font-style:normal; font-size:1.02cqw; color:var(--ice); }
 
   /* card grids */
   .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.5cqw; }
@@ -182,11 +191,11 @@
     <!-- ============ SLIDE 1 · 듣기 ============ -->
     <section class="slide dark" data-i="0">
       <div class="pad bg-navy s1">
-        <div class="kicker mint">BUDSAI · 기술 아이디어</div>
+        <div class="kicker mint">BUDSAI Q · 기술 아이디어</div>
         <h1 class="title">귀에 꽂은 버즈가, 당신이 '듣던 것'까지 이해한다</h1>
         <p class="sub dk" style="margin-top:1cqw;">
           지금까지의 음성비서는 <span class="em-mint">"내가 말한 것"</span>만 들었습니다.
-          BudsAI는 한 발 더 나아가 <span class="em-mint">"내가 듣고 있던 소리"</span>까지 함께 이해합니다.
+          <span class="em-mint">BudsAI Q</span>는 한 발 더 나아가 <span class="em-mint">"내가 듣고 있던 소리"</span>까지 함께 이해합니다.
         </p>
 
         <div class="kicker" style="margin-top:2.4cqw;">STEP 1 · 듣기</div>
@@ -203,7 +212,7 @@
             <div class="ico onnavy"><svg viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"/><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"/><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"/><line x1="12" y1="19" x2="12" y2="23"/></svg></div>
             <div class="ctitle">새로 녹음하지 않습니다</div>
             <span class="tag dk mt-tag">ANC Mic Reuse</span>
-            <p class="ctext">노이즈 캔슬링(ANC)은 소음을 지우려고 주변 소리를 '이미' 듣고 있습니다. BudsAI는 그 소리를 빌려 쓸 뿐, 마이크를 더 켜거나 전력을 더 쓰지 않습니다.</p>
+            <p class="ctext">노이즈 캔슬링(ANC)은 소음을 지우려고 주변 소리를 '이미' 듣고 있습니다. BudsAI Q는 그 소리를 빌려 쓸 뿐, 마이크를 더 켜거나 전력을 더 쓰지 않습니다.</p>
           </div>
           <div class="card dk">
             <div class="ico onnavy"><svg viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3v5H2zM7 7h3v15H7zM12 4h3v18h-3zM17 9h3v8h-3z"/></svg></div>
@@ -220,16 +229,16 @@
     <section class="slide light" data-i="1">
       <div class="pad bg-paper">
         <div class="kicker">STEP 2 · 묻기</div>
-        <h2 class="htitle big">버튼을 길게 누르고 물어보면, 버즈가 알아서 정리합니다</h2>
-        <p class="sub lt" style="margin-top:.8cqw;">"띵" 소리와 함께 질문을 받기 시작하고, 말이 끝나면 스스로 멈춘 뒤 → 들은 소리들을 작게 압축해 → 하나의 봉투로 묶습니다.</p>
+        <h2 class="htitle big">Buds Q를 실행해 물어보면, 버즈가 알아서 정리합니다</h2>
+        <p class="sub lt" style="margin-top:.8cqw;"><span style="color:#1C6E8C;font-weight:700;">Buds Q</span>가 실행되면 "띵" 소리와 함께 질문을 받기 시작하고, 말이 끝나면 스스로 멈춘 뒤 → 들은 소리들을 작게 압축해 → 하나의 봉투로 묶습니다.</p>
 
         <div class="flowrow" style="margin-top:1.5cqw;">
           <div class="card lt rel">
             <span class="num">1</span>
-            <div class="ico onpaper"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V6a2 2 0 0 1 4 0v5m0 0V4a2 2 0 0 1 4 0v9m-8-2a2 2 0 0 0-4 0v2a8 8 0 0 0 8 8h2a8 8 0 0 0 8-8V9a2 2 0 0 0-4 0"/></svg></div>
-            <div class="ctitle">길게 누르기</div>
-            <p class="ctext">버튼 2초 = "지금부터 들을게" 신호. 짧은 알림음으로 준비 완료를 알려줍니다.</p>
-            <span class="tag lt" style="margin-top:.85cqw;">Long-press Trigger</span>
+            <div class="ico onpaper"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg></div>
+            <div class="ctitle">Buds Q 실행</div>
+            <p class="ctext">Buds Q를 실행하면 "지금부터 들을게" 신호로 짧은 알림음이 울리고, 버즈가 질문을 받을 준비를 마칩니다.</p>
+            <span class="tag lt" style="margin-top:.85cqw;">Buds Q Trigger</span>
           </div>
           <div class="card lt rel">
             <span class="num">2</span>
@@ -294,7 +303,7 @@
           </div>
           <div class="node dk">
             <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
-            <div class="nm">서버</div>
+            <div class="nm">BudsAI 서버</div>
             <div class="nd">봉투를 열어 처리</div>
             <span class="tag dk">AI Orchestrator</span>
           </div>
@@ -352,7 +361,7 @@
           <div class="card dk">
             <div class="ico onnavy"><svg viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg></div>
             <div class="ctitle">④ 목소리로 답하기</div>
-            <span class="tag dk mt-tag">Neural TTS · Opus</span>
+            <span class="tag dk mt-tag">Neural TTS · LC3</span>
             <p class="ctext">최종 답을 자연스러운 음성으로 만들어 버즈로 들려줍니다. 일정 등록·전화 같은 실행까지 이어집니다.</p>
           </div>
         </div>
