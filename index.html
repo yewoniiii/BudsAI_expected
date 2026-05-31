@@ -1,484 +1,384 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BudsAI Expected Effects</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: #e8eef7;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
-      color: #111827;
-    }
-    .deck {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      padding: 40px;
-      align-items: center;
-    }
-    .slide {
-      width: 1280px;
-      height: 720px;
-      background: linear-gradient(135deg, #f8fbff 0%, #eef6ff 100%);
-      border-radius: 30px;
-      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.18);
-      padding: 54px 64px;
-      position: relative;
-      overflow: hidden;
-    }
-    .slide::before {
-      content: "";
-      position: absolute;
-      top: -170px;
-      right: -120px;
-      width: 430px;
-      height: 430px;
-      border-radius: 50%;
-      background: rgba(37, 99, 235, 0.10);
-    }
-    .slide::after {
-      content: "";
-      position: absolute;
-      bottom: -150px;
-      left: -120px;
-      width: 360px;
-      height: 360px;
-      border-radius: 50%;
-      background: rgba(14, 165, 233, 0.10);
-    }
-    .content { position: relative; z-index: 1; }
-    .label {
-      font-size: 17px;
-      font-weight: 800;
-      color: #2563eb;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    h1 {
-      margin: 0;
-      font-size: 39px;
-      line-height: 1.2;
-      letter-spacing: -0.04em;
-    }
-    .subtitle {
-      margin-top: 13px;
-      font-size: 20px;
-      color: #4b5563;
-      font-weight: 500;
-    }
-    .hero {
-      margin-top: 34px;
-      padding: 22px 28px;
-      border-radius: 24px;
-      background: #111827;
-      color: white;
-      font-size: 25px;
-      font-weight: 850;
-      letter-spacing: -0.02em;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .hero small {
-      display: block;
-      margin-top: 6px;
-      font-size: 17px;
-      color: #cbd5e1;
-      font-weight: 600;
-      letter-spacing: 0;
-      line-height: 1.35;
-    }
-    .badge {
-      flex: none;
-      border-radius: 999px;
-      background: #dbeafe;
-      color: #1d4ed8;
-      padding: 12px 18px;
-      font-size: 18px;
-      font-weight: 900;
-      white-space: nowrap;
-    }
-    .grid3 {
-      margin-top: 26px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-    .card {
-      min-height: 255px;
-      background: rgba(255, 255, 255, 0.92);
-      border: 2px solid #dbeafe;
-      border-radius: 28px;
-      padding: 26px 24px;
-      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
-    }
-    .icon {
-      width: 58px;
-      height: 58px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #2563eb, #38bdf8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 28px;
-      margin-bottom: 18px;
-    }
-    .card h2 {
-      margin: 0 0 12px;
-      font-size: 25px;
-      letter-spacing: -0.03em;
-    }
-    .card p {
-      margin: 0;
-      font-size: 18px;
-      line-height: 1.48;
-      color: #475569;
-      font-weight: 500;
-    }
-    .impact-row {
-      margin-top: 26px;
-      display: grid;
-      grid-template-columns: 1.25fr 1fr 1.25fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-    .phase {
-      background: white;
-      border-radius: 26px;
-      padding: 24px 24px;
-      border: 2px solid #e0e7ff;
-      min-height: 320px;
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
-    }
-    .phase h2 {
-      margin: 0 0 15px;
-      font-size: 27px;
-      letter-spacing: -0.03em;
-    }
-    .phase ul {
-      margin: 0;
-      padding-left: 22px;
-      font-size: 18px;
-      line-height: 1.68;
-      color: #475569;
-      font-weight: 550;
-    }
-    .connector {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #2563eb;
-      font-weight: 900;
-      font-size: 24px;
-      gap: 18px;
-    }
-    .circle {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
-      font-size: 21px;
-      line-height: 1.25;
-      box-shadow: 0 18px 35px rgba(37, 99, 235, 0.22);
-    }
-    .arrow { font-size: 44px; }
-    .bottom-message {
-      position: absolute;
-      left: 64px;
-      right: 64px;
-      bottom: 45px;
-      border-radius: 22px;
-      background: #eff6ff;
-      border-left: 8px solid #2563eb;
-      padding: 18px 24px;
-      font-size: 21px;
-      font-weight: 850;
-      color: #1e3a8a;
-      z-index: 2;
-    }
-    .note {
-      color: #64748b;
-      font-size: 15px;
-      margin-top: 14px;
-      font-weight: 600;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BudsAI · 기술 아이디어 요약</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0E1330; --navy2:#1B2350; --navy3:#24306A;
+    --ice:#CADCFC; --mint:#5EEAD4; --teal:#22D3EE;
+    --white:#fff; --slate:#8A95C0; --ink:#10162F;
+    --paper:#F4F7FF; --card:#fff; --line:#D6DEF5; --bodylt:#44507A;
+    --display:'Gowun Batang', serif;
+    --sans:'Noto Sans KR', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:var(--sans);
+    background:#070a1c;
+    color:var(--white);
+    min-height:100vh; padding:28px 24px;
+    overflow-x:hidden;
+  }
+  .stage{ width:100%; max-width:1180px; margin:0 auto; }
 
-    .flow-compare {
-      margin-top: 26px;
-      display: grid;
-      grid-template-columns: 1fr 78px 1fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-    .flow-box {
-      background: rgba(255,255,255,0.94);
-      border-radius: 24px;
-      padding: 20px 22px;
-      border: 2px solid #e0e7ff;
-      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
-      min-height: 124px;
-    }
-    .flow-box.before { border-color: #e5e7eb; }
-    .flow-box.after { border-color: #bfdbfe; background: #f8fbff; }
-    .flow-title {
-      font-size: 20px;
-      font-weight: 900;
-      margin-bottom: 13px;
-      color: #111827;
-    }
-    .flow-steps {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 15px;
-      font-weight: 800;
-      color: #475569;
-    }
-    .flow-steps span {
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: #f1f5f9;
-      white-space: nowrap;
-    }
-    .flow-box.after .flow-steps span {
-      background: #dbeafe;
-      color: #1d4ed8;
-    }
-    .flow-arrow {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 40px;
-      font-weight: 900;
-      color: #2563eb;
-    }
-    .grid4 {
-      margin-top: 22px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-    .mini-card {
-      min-height: 205px;
-      background: rgba(255,255,255,0.94);
-      border: 2px solid #dbeafe;
-      border-radius: 24px;
-      padding: 21px 18px;
-      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.075);
-    }
-    .mini-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 15px;
-      background: linear-gradient(135deg, #2563eb, #38bdf8);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 23px;
-      margin-bottom: 14px;
-      font-weight: 900;
-    }
-    .mini-card h2 {
-      margin: 0 0 10px;
-      font-size: 21px;
-      letter-spacing: -0.03em;
-    }
-    .mini-card p {
-      margin: 0;
-      font-size: 15.8px;
-      line-height: 1.45;
-      color: #475569;
-      font-weight: 550;
-    }
-    .effect-tagline {
-      margin-top: 18px;
-      border-radius: 20px;
-      background: #111827;
-      color: #fff;
-      padding: 16px 22px;
-      font-size: 20px;
-      font-weight: 850;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-    .effect-tagline span:last-child {
-      color: #93c5fd;
-      white-space: nowrap;
-      font-size: 18px;
-    }
+  /* slides stacked vertically */
+  .deck{ display:flex; flex-direction:column; gap:26px; }
+  .slide{
+    position:relative;
+    width:100%; aspect-ratio:16/9;
+    border-radius:18px; overflow:hidden;
+    box-shadow:0 22px 55px rgba(0,0,0,.45);
+    container-type:inline-size;
+  }
 
-  </style>
+  /* all internal sizing in cqw so it scales with the slide */
+  .pad{ position:absolute; inset:0; padding:5cqw 5.3cqw; }
+  .bg-navy{ background:radial-gradient(120cqw 80cqw at 92% -10%, rgba(34,211,238,.12), transparent 55%),
+                       radial-gradient(90cqw 70cqw at -8% 110%, rgba(94,234,212,.10), transparent 55%),
+                       var(--navy); }
+  .bg-paper{ background:var(--paper); }
+
+  .kicker{ font-size:1.45cqw; font-weight:700; letter-spacing:.28em; color:var(--teal); }
+  .kicker.mint{ color:var(--mint); }
+  h1.title{ font-family:var(--display); font-weight:700; line-height:1.18; }
+  .s1 h1{ font-size:4.4cqw; color:var(--white); margin-top:.4cqw; }
+  .sub{ font-size:1.62cqw; line-height:1.5; }
+  .sub.dk{ color:var(--ice); }
+  .sub.lt{ color:#3A4670; }
+  .em-mint{ color:var(--mint); font-weight:700; }
+
+  h2.htitle{ font-family:var(--display); font-weight:700; line-height:1.2; margin-top:.5cqw; }
+  .dark h2.htitle{ color:var(--white); }
+  .light h2.htitle{ color:var(--ink); }
+  .htitle.big{ font-size:2.9cqw; }
+  .htitle.mid{ font-size:2.3cqw; }
+
+  /* tech pill */
+  .tag{
+    display:inline-flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-weight:600; font-size:1.06cqw;
+    letter-spacing:.02em; padding:.4cqw .75cqw; border-radius:999px;
+    white-space:nowrap; line-height:1;
+  }
+  .tag.lt{ background:#EAF0FF; border:1px solid var(--teal); color:#1C6E8C; }
+  .tag.dk{ background:var(--navy3); border:1px solid var(--mint); color:var(--mint); }
+
+  /* card grids */
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.5cqw; }
+  .grid4{ display:grid; grid-template-columns:repeat(4,1fr); gap:1.3cqw; }
+  .card{ border-radius:14px; padding:1.7cqw; box-shadow:0 8px 22px rgba(8,12,30,.16); }
+  .card.dk{ background:var(--navy2); border:1px solid #2A3568; }
+  .card.lt{ background:var(--card); border:1px solid var(--line); }
+
+  .ico{
+    width:3cqw; height:3cqw; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    border:1.4px solid var(--mint); margin-bottom:1.1cqw;
+  }
+  .ico svg{ width:1.55cqw; height:1.55cqw; }
+  .ico.onnavy{ background:var(--navy); }
+  .ico.onpaper{ background:var(--paper); border-color:var(--teal); }
+
+  .ctitle{ font-weight:700; font-size:1.62cqw; line-height:1.25; }
+  .dark .ctitle{ color:var(--white); }
+  .light .ctitle{ color:var(--ink); }
+  .ctext{ font-size:1.18cqw; line-height:1.5; margin-top:.5cqw; }
+  .dark .ctext{ color:var(--ice); }
+  .light .ctext{ color:var(--bodylt); }
+  .mt-tag{ margin:.85cqw 0; }
+
+  .num{ position:absolute; top:1.4cqw; right:1.4cqw; width:2.2cqw; height:2.2cqw; border-radius:50%;
+        background:var(--mint); color:var(--navy); font-family:var(--sans); font-weight:900;
+        font-size:1.5cqw; display:flex; align-items:center; justify-content:center; }
+  .card.rel{ position:relative; }
+
+  /* slide 2 specifics */
+  .flowrow{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.3cqw; }
+  .band{ margin-top:1.5cqw; background:var(--navy); border-radius:14px; padding:1.7cqw 2cqw;
+         display:flex; align-items:center; gap:1.5cqw; box-shadow:0 8px 22px rgba(8,12,30,.3); }
+  .band .lead{ flex:1; }
+  .band h3{ font-family:var(--display); font-size:2.1cqw; color:var(--white); display:flex; align-items:center; gap:.8cqw; }
+  .band h3 svg{ width:1.7cqw; height:1.7cqw; }
+  .band .bt{ font-size:1.28cqw; color:var(--ice); line-height:1.5; margin-top:.7cqw; max-width:62cqw; }
+  .stat{ border-radius:12px; width:11.5cqw; text-align:center; padding:1cqw .5cqw; }
+  .stat .lbl{ font-size:1.15cqw; }
+  .stat .big{ font-weight:900; font-size:2.4cqw; line-height:1.1; margin-top:.2cqw; }
+  .stat.orig{ background:var(--navy2); border:1px solid #33407A; }
+  .stat.orig .lbl{ color:var(--slate);} .stat.orig .big{ color:var(--white);}
+  .stat.comp{ background:var(--mint); } .stat.comp .lbl{ color:var(--navy);} .stat.comp .big{ color:var(--navy);}
+  .arrowSm{ color:var(--teal); font-size:2.4cqw; font-weight:700; }
+  .bandtag{ align-self:flex-start; }
+
+  /* slide 3 chain */
+  .chain{ display:flex; align-items:stretch; justify-content:center; gap:0; margin-top:1.2cqw; }
+  .node{ width:24cqw; border-radius:14px; padding:1.5cqw 1cqw; text-align:center;
+         box-shadow:0 8px 22px rgba(8,12,30,.16); }
+  .node.lt{ background:var(--card); border:1px solid var(--line); }
+  .node.dk{ background:var(--navy); border:1px solid var(--navy); }
+  .node .ic{ width:3.3cqw; height:3.3cqw; border-radius:50%; margin:0 auto .7cqw; border:1.4px solid var(--mint);
+             display:flex; align-items:center; justify-content:center; }
+  .node .ic svg{ width:1.7cqw; height:1.7cqw; }
+  .node.lt .ic{ background:var(--paper); } .node.dk .ic{ background:var(--navy2); }
+  .node .nm{ font-weight:700; font-size:1.7cqw; }
+  .node.lt .nm{ color:var(--ink);} .node.dk .nm{ color:var(--white);}
+  .node .nd{ font-size:1.1cqw; margin-top:.35cqw; }
+  .node.lt .nd{ color:#5A6595;} .node.dk .nd{ color:var(--ice);}
+  .node .tag{ margin-top:.75cqw; }
+  .link{ display:flex; flex-direction:column; align-items:center; justify-content:center; width:8cqw; }
+  .link svg.lk{ width:1.7cqw; height:1.7cqw; color:var(--mint); margin-bottom:.2cqw; }
+  .link .ar{ width:100%; height:2px; background:var(--teal); position:relative; }
+  .link .ar:after{ content:''; position:absolute; right:-1px; top:-4px; border-left:8px solid var(--teal);
+                   border-top:5px solid transparent; border-bottom:5px solid transparent; }
+  .seal{ text-align:center; font-style:italic; color:#5A6595; font-size:1.2cqw; margin-top:.8cqw; }
+
+  .pillars{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.5cqw; margin-top:1.2cqw; }
+  .pillar{ position:relative; background:var(--card); border:1px solid var(--line); border-radius:12px;
+           padding:1.3cqw 1.4cqw 1.3cqw 1.6cqw; box-shadow:0 8px 22px rgba(8,12,30,.14); overflow:hidden;}
+  .pillar:before{ content:''; position:absolute; left:0; top:0; bottom:0; width:.5cqw; background:var(--mint); }
+  .pillar .ph{ display:flex; align-items:center; gap:.7cqw; }
+  .pillar .ph svg{ width:1.7cqw; height:1.7cqw; }
+  .pillar .ph b{ font-size:1.55cqw; color:var(--ink); }
+  .pillar .tag{ margin:.7cqw 0; }
+  .pillar p{ font-size:1.12cqw; color:var(--bodylt); line-height:1.45; }
+
+  .secttitle{ font-family:var(--display); font-weight:700; font-size:1.95cqw; color:var(--ink); margin-top:1.4cqw; }
+
+  /* slide 4 takeaway */
+  .takeaway{ margin-top:1.5cqw; background:var(--navy2); border:1.4px solid var(--mint); border-radius:14px; padding:1.6cqw 2cqw; }
+  .takeaway .tl{ font-size:1.3cqw; font-weight:700; letter-spacing:.22em; color:var(--mint); }
+  .takeaway .ts{ font-family:var(--display); font-weight:700; font-size:2.1cqw; line-height:1.4; color:var(--white); margin-top:.6cqw; }
+
+  .pageno{ position:absolute; bottom:2.5cqw; right:3.5cqw; font-size:1.1cqw; color:var(--slate); }
+  .dark .pageno{ color:var(--slate);} .light .pageno{ color:#9AA4C8;}
+
+  /* nav */
+  .nav{ display:flex; align-items:center; justify-content:center; gap:18px; margin-top:20px; }
+  .nav button{
+    font-family:var(--sans); font-weight:700; font-size:14px;
+    background:var(--navy2); color:var(--ice); border:1px solid #2E3A6E;
+    padding:9px 18px; border-radius:10px; cursor:pointer; transition:.15s;
+  }
+  .nav button:hover{ background:var(--navy3); color:#fff; }
+  .nav button:disabled{ opacity:.35; cursor:default; }
+  .dots{ display:flex; gap:9px; }
+  .dot{ width:9px; height:9px; border-radius:50%; background:#2E3A6E; cursor:pointer; transition:.15s; }
+  .dot.on{ background:var(--mint); transform:scale(1.25); }
+  .hint{ text-align:center; color:#5A6595; font-size:12px; margin-top:10px; }
+
+  @media (max-width:640px){
+    .nav button{ padding:8px 12px; font-size:12px; }
+  }
+</style>
 </head>
 <body>
-  <main class="deck">
-    <section class="slide">
-      <div class="content">
-        <div class="label">Expected Effects 01</div>
-        <h1>사용성 개선 효과: 듣고 있던 순간을 바로 질문하고 실행으로 연결</h1>
-        <div class="subtitle">BudsAI는 “기억해서 검색하는 경험”을 “방금 들은 맥락에 바로 묻는 경험”으로 바꾼다.</div>
+<div class="stage">
+  <div class="deck">
 
-        <div class="flow-compare">
-          <div class="flow-box before">
-            <div class="flow-title">기존 사용 흐름</div>
-            <div class="flow-steps">
-              <span>소리 인지</span><span>앱 열기</span><span>검색어 추정</span><span>검색/전환</span><span>결과 확인</span>
-            </div>
+    <!-- ============ SLIDE 1 · 듣기 ============ -->
+    <section class="slide dark" data-i="0">
+      <div class="pad bg-navy s1">
+        <div class="kicker mint">BUDSAI · 기술 아이디어</div>
+        <h1 class="title">귀에 꽂은 버즈가, 당신이 '듣던 것'까지 이해한다</h1>
+        <p class="sub dk" style="margin-top:1cqw;">
+          지금까지의 음성비서는 <span class="em-mint">"내가 말한 것"</span>만 들었습니다.
+          BudsAI는 한 발 더 나아가 <span class="em-mint">"내가 듣고 있던 소리"</span>까지 함께 이해합니다.
+        </p>
+
+        <div class="kicker" style="margin-top:2.4cqw;">STEP 1 · 듣기</div>
+        <h2 class="htitle mid" style="color:#fff;">버즈는 늘 '최근 30초'를 기억하고 있습니다</h2>
+
+        <div class="grid3" style="margin-top:1.5cqw;">
+          <div class="card dk">
+            <div class="ico onnavy"><svg viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+            <div class="ctitle">항상 '방금 30초'를 손에 쥠</div>
+            <span class="tag dk mt-tag">Ring Buffer · 30s</span>
+            <p class="ctext">버즈가 켜져 있는 동안 들어오는 소리를 늘 최근 30초만큼만 기억합니다. 오래된 소리는 지우고 새 소리로 덮어써, 평소엔 아무것도 저장하지 않습니다.</p>
           </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-box after">
-            <div class="flow-title">BudsAI 사용 흐름</div>
-            <div class="flow-steps">
-              <span>롱프레스</span><span>자연어 질문</span><span>직전 사운드 분석</span><span>답변 + Action</span>
-            </div>
+          <div class="card dk">
+            <div class="ico onnavy"><svg viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"/><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"/><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"/><line x1="12" y1="19" x2="12" y2="23"/></svg></div>
+            <div class="ctitle">새로 녹음하지 않습니다</div>
+            <span class="tag dk mt-tag">ANC Mic Reuse</span>
+            <p class="ctext">노이즈 캔슬링(ANC)은 소음을 지우려고 주변 소리를 '이미' 듣고 있습니다. BudsAI는 그 소리를 빌려 쓸 뿐, 마이크를 더 켜거나 전력을 더 쓰지 않습니다.</p>
+          </div>
+          <div class="card dk">
+            <div class="ico onnavy"><svg viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3v5H2zM7 7h3v15H7zM12 4h3v18h-3zM17 9h3v8h-3z"/></svg></div>
+            <div class="ctitle">내 소리 + 주변 소리 둘 다</div>
+            <span class="tag dk mt-tag">Dual Stream · int+ext</span>
+            <p class="ctext">이어폰에서 나오던 음악(내부음)과 카페·거리의 주변음(외부음)을 함께 쥐고 있어, "방금 그 노래" 같은 질문에 답할 준비가 되어 있습니다.</p>
           </div>
         </div>
-
-        <div class="grid4">
-          <div class="mini-card">
-            <div class="mini-icon">↺</div>
-            <h2>놓친 정보 회복</h2>
-            <p>지나가 버린 안내방송, 대화, 음악을 직전 버퍼 기반으로 다시 확인해 청각 정보의 일회성을 줄인다.</p>
-          </div>
-          <div class="mini-card">
-            <div class="mini-icon">◎</div>
-            <h2>맥락형 질의</h2>
-            <p>“이 노래”, “방금 그 말”, “이 소리”처럼 검색어로 바꾸기 어려운 표현도 Track A와 결합해 해석한다.</p>
-          </div>
-          <div class="mini-card">
-            <div class="mini-icon">↯</div>
-            <h2>조작 부담 감소</h2>
-            <p>이동 중·운동 중·양손 사용 중에도 화면 전환 없이 버즈 interaction과 음성만으로 결과를 받을 수 있다.</p>
-          </div>
-          <div class="mini-card">
-            <div class="mini-icon">✓</div>
-            <h2>답변 이후 실행</h2>
-            <p>Galaxy에서는 음악 열기, 일정 등록, 알림 설정 등 후속 Action Item으로 이어져 탐색 후 행동 단계를 줄인다.</p>
-          </div>
-        </div>
-
-        <div class="effect-tagline">
-          <span>사용성 핵심 가치: 기억·검색·전환 비용 감소 → 즉시 이해·저장·실행 경험 제공</span>
-          <span>Listen → Ask → Act</span>
-        </div>
+        <div class="pageno">1 / 4</div>
       </div>
     </section>
 
-    <section class="slide">
-      <div class="content">
-        <div class="label">Expected Effects 02</div>
-        <h1>당사 제품군 확대 적용 효과</h1>
-        <div class="subtitle">BudsAI를 Buds 단일 기능이 아닌 Galaxy 생태계 확장형 Audio AI 경험으로 적용</div>
+    <!-- ============ SLIDE 2 · 묻기 ============ -->
+    <section class="slide light" data-i="1">
+      <div class="pad bg-paper">
+        <div class="kicker">STEP 2 · 묻기</div>
+        <h2 class="htitle big">버튼을 길게 누르고 물어보면, 버즈가 알아서 정리합니다</h2>
+        <p class="sub lt" style="margin-top:.8cqw;">"띵" 소리와 함께 질문을 받기 시작하고, 말이 끝나면 스스로 멈춘 뒤 → 들은 소리들을 작게 압축해 → 하나의 봉투로 묶습니다.</p>
 
-        <style>
-          .product-grid {
-            margin-top: 28px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-          }
-          .product-card {
-            background: rgba(255,255,255,0.94);
-            border: 2px solid #dbeafe;
-            border-radius: 24px;
-            padding: 22px 22px;
-            min-height: 180px;
-            box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
-          }
-          .product-card.wide {
-            grid-column: span 2;
-          }
-          .product-card h2 {
-            margin: 0 0 12px;
-            font-size: 23px;
-            letter-spacing: -0.03em;
-            color: #111827;
-          }
-          .product-card p {
-            margin: 0;
-            font-size: 17px;
-            line-height: 1.45;
-            color: #475569;
-            font-weight: 560;
-          }
-          .product-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 21px;
-            margin-bottom: 13px;
-            font-weight: 900;
-          }
-          .source-note {
-            position: absolute;
-            left: 64px;
-            bottom: 18px;
-            font-size: 13px;
-            color: #94a3b8;
-            z-index: 3;
-          }
-        </style>
-
-        <div class="product-grid">
-          <div class="product-card">
-            <div class="product-icon">B</div>
-            <h2>Buds 라인업 가치 상승</h2>
-            <p>Buds3/Buds Pro 후속 모델의 핵심 차별화 기능으로 탑재 가능 → 단순 무선 이어폰을 "AI 청취 어시스턴트"로 포지셔닝 전환.</p>
+        <div class="flowrow" style="margin-top:1.5cqw;">
+          <div class="card lt rel">
+            <span class="num">1</span>
+            <div class="ico onpaper"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V6a2 2 0 0 1 4 0v5m0 0V4a2 2 0 0 1 4 0v9m-8-2a2 2 0 0 0-4 0v2a8 8 0 0 0 8 8h2a8 8 0 0 0 8-8V9a2 2 0 0 0-4 0"/></svg></div>
+            <div class="ctitle">길게 누르기</div>
+            <p class="ctext">버튼 2초 = "지금부터 들을게" 신호. 짧은 알림음으로 준비 완료를 알려줍니다.</p>
+            <span class="tag lt" style="margin-top:.85cqw;">Long-press Trigger</span>
           </div>
-
-          <div class="product-card">
-            <div class="product-icon">G</div>
-            <h2>Galaxy 생태계 락인 강화</h2>
-            <p>Galaxy 폰·워치·태블릿·TV·차량(One UI Auto)에 컴패니언 레이어 확장 시 "삼성을 쓰면 BudsAI가 더 똑똑하게 동작" 차별점 확보 → Galaxy 구매 동인.</p>
+          <div class="card lt rel">
+            <span class="num">2</span>
+            <div class="ico onpaper"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.5c-1.5-2-4-2.5-5.5-1.5C5 5 4.5 7 5 9c.4 1.6 0 3 .5 5 .4 1.6 1.6 2.5 2.5 1.5.8-.9.5-2.5 1-3.5.4-.8 1.2-.8 1.6 0 .5 1 .2 2.6 1 3.5.9 1 2.1.1 2.5-1.5.5-2 .1-3.4.5-5 .5-2 0-4-1.5-5-1.5-1-4-.5-5.5 1.5z"/></svg></div>
+            <div class="ctitle">말 끝 자동 감지</div>
+            <p class="ctext">소리가 아니라 '턱뼈 진동'을 보기 때문에, 시끄러운 곳에서도 말이 끝난 순간을 정확히 잡아 스스로 멈춥니다.</p>
+            <span class="tag lt" style="margin-top:.85cqw;">Voice Detect · VPU</span>
           </div>
-
-          <div class="product-card">
-            <div class="product-icon">S</div>
-            <h2>Bixby·SmartThings 재활성화</h2>
-            <p>기존 자산(Bixby NLU, SmartThings, Wearable) 재사용 → 신규 인프라 투자 최소.</p>
-          </div>
-
-          <div class="product-card">
-            <div class="product-icon">↔</div>
-            <h2>타사 호환을 통한 저변 확대</h2>
-            <p>비-Galaxy 호스트도 동작 → 진입 마찰 0, 호환 버즈 확산 시 즉시 활용. 이후 Galaxy 특화 UX로 자연스러운 업셀.</p>
-          </div>
-
-          <div class="product-card">
-            <div class="product-icon">＋</div>
-            <h2>새 호환 기기 즉시 적용</h2>
-            <p>표준 BT PAN 기반이라 향후 출시되는 갤럭시 차량·TV·웨어러블 등 BT+인터넷 가능한 모든 신제품에 추가 개발 없이 적용 가능.</p>
-          </div>
-
-          <div class="product-card">
-            <div class="product-icon">D</div>
-            <h2>데이터 자산화</h2>
-            <p>(사용자 동의 하) 음성 의도 분류·환경음 인식 데이터 축적 → 향후 온디바이스 AI 모델 학습 자원.</p>
+          <div class="card lt rel">
+            <span class="num">3</span>
+            <div class="ico onpaper"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg></div>
+            <div class="ctitle">한 봉투로 포장</div>
+            <p class="ctext">내 질문 + 듣던 소리 + 주변음을 한 묶음으로 포장하고 "BudsAI한테 물어봐 줘" 쪽지를 붙입니다.</p>
+            <span class="tag lt" style="margin-top:.85cqw;">SBAP · 자체 프로토콜</span>
           </div>
         </div>
+
+        <div class="band">
+          <div class="lead">
+            <h3>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/><path d="M12 7v5l4 2"/></svg>
+              작게 압축하기 — 6MB를 200KB로
+            </h3>
+            <p class="bt">귀에 스치는 짧은 소리도 숫자로는 거대합니다. 버즈에 이미 들어있는 압축기(LC3)가 '귀에 들리는 부분만' 남겨, 한 요청을 약 1/30 크기로 줄입니다. 덕분에 블루투스로 2초 만에 보낼 수 있습니다.</p>
+            <span class="tag dk bandtag" style="margin-top:.9cqw;">LC3 24kbps · LE Audio</span>
+          </div>
+          <div class="stat orig"><div class="lbl">원본</div><div class="big">≈6MB</div></div>
+          <div class="arrowSm">›</div>
+          <div class="stat comp"><div class="lbl">압축 후</div><div class="big">200KB</div></div>
+        </div>
+        <div class="pageno">2 / 4</div>
       </div>
-      <div class="source-note">Source: proposal.html#impact — 기대효과 B. 당사 제품군 확대 적용 효과</div>
     </section>
-  </main>
+
+    <!-- ============ SLIDE 3 · 보내기 ============ -->
+    <section class="slide light" data-i="2">
+      <div class="pad bg-paper">
+        <div class="kicker">STEP 3 · 보내기</div>
+        <h2 class="htitle big">어떤 기기든 '통로'로 빌려, 아무도 못 여는 봉투로 보냅니다</h2>
+        <p class="sub lt" style="margin-top:.8cqw;">갤럭시 폰뿐 아니라 노트북·차량·TV 등 인터넷이 되는 아무 기기나 잠깐 통로로 빌립니다. 중간 기기는 봉투를 '전달'만 할 뿐, 안의 내용은 끝까지 볼 수 없습니다.</p>
+
+        <div class="chain">
+          <div class="node lt">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+            <div class="nm">버즈</div>
+            <div class="nd">포장 · 봉인 · 전송</div>
+            <span class="tag lt">Capture · LC3</span>
+          </div>
+          <div class="link">
+            <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <div class="ar"></div>
+          </div>
+          <div class="node lt">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg></div>
+            <div class="nm">중간 기기</div>
+            <div class="nd">겉봉투만 전달 (내용 못 봄)</div>
+            <span class="tag lt">BT Tethering · BNEP·NAT</span>
+          </div>
+          <div class="link">
+            <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <div class="ar"></div>
+          </div>
+          <div class="node dk">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
+            <div class="nm">서버</div>
+            <div class="nd">봉투를 열어 처리</div>
+            <span class="tag dk">AI Orchestrator</span>
+          </div>
+        </div>
+        <div class="seal">🔒 봉인된 내용물은 통로를 지나는 내내 '안 열림'</div>
+
+        <div class="secttitle">안전을 지키는 3가지 장치</div>
+        <div class="pillars">
+          <div class="pillar">
+            <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><b>정품만 통과</b></div>
+            <span class="tag lt">Knox Attestation 기반</span>
+            <p>정품 폰과 정품 버즈임을 각자 증명해야만 서버에 접속됩니다. 가짜·복제 기기는 처음부터 막힙니다.</p>
+          </div>
+          <div class="pillar">
+            <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><b>양방향 신원 확인</b></div>
+            <span class="tag lt">mTLS · PKI 인증서</span>
+            <p>서버와 버즈가 서로 "너 진짜 맞아?"를 확인합니다. 버즈는 출고 때 받은 '디지털 신분증'으로 자신을 증명합니다.</p>
+          </div>
+          <div class="pillar">
+            <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><b>비밀 키는 칩 속 금고에</b></div>
+            <span class="tag lt">Secure SoC · KMU</span>
+            <p>신분증의 비밀 키는 칩 안 금고에 넣고 '쓰기만, 꺼내기는 불가'로 잠급니다. 칩을 뜯어도 키는 새어나가지 않습니다.</p>
+          </div>
+        </div>
+        <div class="pageno">3 / 4</div>
+      </div>
+    </section>
+
+    <!-- ============ SLIDE 4 · 답하기 ============ -->
+    <section class="slide dark" data-i="3">
+      <div class="pad bg-navy">
+        <div class="kicker">STEP 4 · 답하기</div>
+        <h2 class="htitle big" style="color:#fff;">서버는 '똑똑한 교통정리'만, 두뇌는 최고의 AI에게 빌립니다</h2>
+        <p class="sub dk" style="margin-top:.8cqw;">BudsAI 서버는 직접 분석하지 않습니다. 받은 소리를 정리해 알맞은 곳으로 보내고(교통정리), 실제 이해와 답변은 최고의 AI에게 맡깁니다. 그래서 늘 최신 성능을 빌려 쓸 수 있습니다.</p>
+
+        <div class="grid4" style="margin-top:1.5cqw;">
+          <div class="card dk">
+            <div class="ico onnavy"><svg viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg></div>
+            <div class="ctitle">① 정리 · 교통정리</div>
+            <span class="tag dk mt-tag">PTS Sync · Routing</span>
+            <p class="ctext">세 소리를 시간 순으로 맞추고 "이 질문이 어느 소리를 가리키는지" 정한 뒤, 알맞은 곳으로 보냅니다.</p>
+          </div>
+          <div class="card dk">
+            <div class="ico onnavy"><svg viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4.5 4.5 0 0 0-4.5 4.5c0 .5 0 1 .2 1.4A4 4 0 0 0 5 12a4 4 0 0 0 1.5 3.1 4 4 0 0 0 .5 4.4A3.5 3.5 0 0 0 12 21a3.5 3.5 0 0 0 5-1.5 4 4 0 0 0 .5-4.4A4 4 0 0 0 19 12a4 4 0 0 0-2.7-4.1c.2-.4.2-.9.2-1.4A4.5 4.5 0 0 0 12 2z"/><line x1="12" y1="2" x2="12" y2="21"/></svg></div>
+            <div class="ctitle">② 이해 · 답 생성</div>
+            <span class="tag dk mt-tag">Gemini · Galaxy AI</span>
+            <p class="ctext">갤럭시 AI(Gemini)가 질문을 알아듣고, 무엇을 원하는지 파악해 답변과 '할 일(Action)'을 만듭니다.</p>
+          </div>
+          <div class="card dk">
+            <div class="ico onnavy"><svg viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+            <div class="ctitle">③ 음악은 전문가에게</div>
+            <span class="tag dk mt-tag">Shazam API</span>
+            <p class="ctext">"이 노래 뭐야?"처럼 곡을 찾을 땐 음악 식별 전문(Shazam)에 물어 제목·가수를 정확히 받아옵니다.</p>
+          </div>
+          <div class="card dk">
+            <div class="ico onnavy"><svg viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg></div>
+            <div class="ctitle">④ 목소리로 답하기</div>
+            <span class="tag dk mt-tag">Neural TTS · Opus</span>
+            <p class="ctext">최종 답을 자연스러운 음성으로 만들어 버즈로 들려줍니다. 일정 등록·전화 같은 실행까지 이어집니다.</p>
+          </div>
+        </div>
+
+        <div class="takeaway">
+          <div class="tl">한 문장 요약</div>
+          <div class="ts">버즈는 <span style="color:var(--mint)">이미 듣고 있던 30초</span>를 빌려, <span style="color:var(--mint)">작게 압축해 안전하게 보내고</span>, 서버는 <span style="color:var(--mint)">최고의 AI에게 두뇌를 빌려</span> 답합니다. — 새 부품도, 별도 앱 설치도 없이.</div>
+        </div>
+        <div class="pageno">4 / 4</div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+  // gentle fade-in as each slide scrolls into view
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = 'none'; } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.slide').forEach(s => {
+    s.style.opacity = 0;
+    s.style.transform = 'translateY(14px)';
+    s.style.transition = 'opacity .5s ease, transform .5s ease';
+    io.observe(s);
+  });
+</script>
 </body>
 </html>
