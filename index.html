@@ -81,6 +81,23 @@
   /* card grids */
   .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.5cqw; }
   .grid4{ display:grid; grid-template-columns:repeat(4,1fr); gap:1.3cqw; }
+  /* slide 2 flow cards taller now that the compression band moved to slide 1 */
+  .s2flow{ margin-top:3cqw !important; }
+  .s2flow .card{ padding:2.4cqw 2cqw; }
+  .s2flow .ico{ width:3.6cqw; height:3.6cqw; margin-bottom:1.4cqw; }
+  .s2flow .ico svg{ width:1.9cqw; height:1.9cqw; }
+  .s2flow .ctitle{ font-size:1.9cqw; }
+  .s2flow .ctext{ font-size:1.32cqw; margin-top:.7cqw; }
+  .s2flow .tag{ font-size:1.12cqw; }
+  .s2flow .num{ width:2.5cqw; height:2.5cqw; font-size:1.7cqw; }
+  /* slide 1's 4-up cards are denser than slide 4's */
+  .s1cards.grid4{ gap:1.1cqw; }
+  .s1cards .card{ padding:1.4cqw; }
+  .s1cards .ico{ width:2.7cqw; height:2.7cqw; margin-bottom:.9cqw; }
+  .s1cards .ico svg{ width:1.4cqw; height:1.4cqw; }
+  .s1cards .ctitle{ font-size:1.42cqw; }
+  .s1cards .ctext{ font-size:1.08cqw; }
+  .s1cards .tag{ font-size:.98cqw; }
   .card{ border-radius:14px; padding:1.7cqw; box-shadow:0 8px 22px rgba(8,12,30,.16); }
   .card.dk{ background:var(--navy2); border:1px solid #2A3568; }
   .card.lt{ background:var(--card); border:1px solid var(--line); }
@@ -145,7 +162,33 @@
                    border-top:5px solid transparent; border-bottom:5px solid transparent; }
   .seal{ text-align:center; font-style:italic; color:#5A6595; font-size:1.2cqw; margin-top:.8cqw; }
 
-  .pillars{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.5cqw; margin-top:1.2cqw; }
+  /* slide 3 fork diagram */
+  .forkwrap{ margin-top:.4cqw; }
+  .fork{ width:82%; height:auto; display:block; margin:0 auto; }
+  .forknote{ text-align:center; color:#5A6595; font-size:1.12cqw; line-height:1.45; margin-top:.2cqw; }
+
+  /* slide 3 two-path branches */
+  .branchwrap{ display:flex; flex-direction:column; gap:.8cqw; margin-top:1cqw; }
+  .branch{ display:flex; align-items:center; gap:.6cqw; background:#fff; border:1px solid var(--line);
+           border-radius:13px; padding:.8cqw 1.1cqw; box-shadow:0 6px 18px rgba(8,12,30,.1); }
+  .blabel{ flex:0 0 12cqw; font-weight:700; font-size:1.42cqw; line-height:1.25; padding-right:.6cqw; }
+  .blabel.galaxy{ color:#1C6E8C; }
+  .blabel.other{ color:#5A6595; font-size:1.24cqw; }
+  .bnode{ flex:1; border-radius:10px; padding:.85cqw 1cqw; text-align:center; min-width:0; }
+  .bnode.lt{ background:var(--paper); border:1px solid var(--line); }
+  .bnode.dk{ background:var(--navy); border:1px solid var(--navy); }
+  .bnode b{ display:block; font-size:1.42cqw; }
+  .bnode.lt b{ color:var(--ink); } .bnode.dk b{ color:#fff; }
+  .bnode span{ display:block; font-size:1.02cqw; margin:.2cqw 0 .4cqw; }
+  .bnode.lt span{ color:#5A6595; } .bnode.dk span{ color:var(--ice); }
+  .bnode .tag{ font-style:normal; font-size:.92cqw; padding:.32cqw .6cqw; }
+  .blink{ flex:0 0 6.5cqw; display:flex; flex-direction:column; align-items:center; }
+  .blink .lk{ font-size:.92cqw; color:#1C6E8C; font-weight:700; margin-bottom:.25cqw; white-space:nowrap; }
+  .blink .ar{ width:100%; height:2px; background:var(--teal); position:relative; }
+  .blink .ar:after{ content:''; position:absolute; right:-1px; top:-4px; border-left:7px solid var(--teal);
+                    border-top:5px solid transparent; border-bottom:5px solid transparent; }
+
+  .pillars{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.5cqw; margin-top:.9cqw; }
   .pillar{ position:relative; background:var(--card); border:1px solid var(--line); border-radius:12px;
            padding:1.3cqw 1.4cqw 1.3cqw 1.6cqw; box-shadow:0 8px 22px rgba(8,12,30,.14); overflow:hidden;}
   .pillar:before{ content:''; position:absolute; left:0; top:0; bottom:0; width:.5cqw; background:var(--mint); }
@@ -155,7 +198,7 @@
   .pillar .tag{ margin:.7cqw 0; }
   .pillar p{ font-size:1.12cqw; color:var(--bodylt); line-height:1.45; }
 
-  .secttitle{ font-family:var(--display); font-weight:700; font-size:1.95cqw; color:var(--ink); margin-top:1.4cqw; }
+  .secttitle{ font-family:var(--display); font-weight:700; font-size:1.95cqw; color:var(--ink); margin-top:.9cqw; }
 
   /* slide 4 takeaway */
   .takeaway{ margin-top:1.5cqw; background:var(--navy2); border:1.4px solid var(--mint); border-radius:14px; padding:1.6cqw 2cqw; }
@@ -199,26 +242,32 @@
         </p>
 
         <div class="kicker" style="margin-top:2.4cqw;">STEP 1 · 듣기</div>
-        <h2 class="htitle mid" style="color:#fff;">버즈는 늘 '최근 30초'를 기억하고 있습니다</h2>
+        <h2 class="htitle mid" style="color:#fff;">버즈는 늘 최근 30초의 소리를 기억합니다</h2>
 
-        <div class="grid3" style="margin-top:1.5cqw;">
+        <div class="grid4 s1cards" style="margin-top:1.5cqw;">
           <div class="card dk">
             <div class="ico onnavy"><svg viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
             <div class="ctitle">항상 '방금 30초'를 손에 쥠</div>
-            <span class="tag dk mt-tag">Ring Buffer · 30s</span>
+            <span class="tag dk mt-tag">Ring Buffer · 30s +</span>
             <p class="ctext">버즈가 켜져 있는 동안 들어오는 소리를 늘 최근 30초만큼만 기억합니다. 오래된 소리는 지우고 새 소리로 덮어써, 평소엔 아무것도 저장하지 않습니다.</p>
           </div>
           <div class="card dk">
             <div class="ico onnavy"><svg viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"/><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"/><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"/><line x1="12" y1="19" x2="12" y2="23"/></svg></div>
             <div class="ctitle">새로 녹음하지 않습니다</div>
             <span class="tag dk mt-tag">ANC Mic Reuse</span>
-            <p class="ctext">노이즈 캔슬링(ANC)은 소음을 지우려고 주변 소리를 '이미' 듣고 있습니다. BudsAI Q는 그 소리를 빌려 쓸 뿐, 마이크를 더 켜거나 전력을 더 쓰지 않습니다.</p>
+            <p class="ctext">노이즈 캔슬링(ANC)은 소음을 지우려고 주변 소리를 '이미' 듣고 있습니다. BudsAI Q는 그 소리를 빌려 쓸 뿐, 마이크를 더 켜지 않습니다.</p>
           </div>
           <div class="card dk">
             <div class="ico onnavy"><svg viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3v5H2zM7 7h3v15H7zM12 4h3v18h-3zM17 9h3v8h-3z"/></svg></div>
             <div class="ctitle">내 소리 + 주변 소리 둘 다</div>
             <span class="tag dk mt-tag">Dual Stream · int+ext</span>
             <p class="ctext">이어폰에서 나오던 음악(내부음)과 카페·거리의 주변음(외부음)을 함께 쥐고 있어, "방금 그 노래" 같은 질문에 답할 준비가 되어 있습니다.</p>
+          </div>
+          <div class="card dk">
+            <div class="ico onnavy"><svg viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/><path d="M12 7v5l4 2"/></svg></div>
+            <div class="ctitle">작게 압축 — 6MB→200KB</div>
+            <span class="tag dk mt-tag">LC3 24kbps</span>
+            <p class="ctext">버즈에 이미 있는 압축기(LC3)가 '귀에 들리는 부분만' 남겨 한 요청을 약 1/30로 줄입니다. 덕분에 블루투스로 2초 만에 보낼 수 있습니다.</p>
           </div>
         </div>
         <div class="pageno">1 / 4</div>
@@ -229,45 +278,31 @@
     <section class="slide light" data-i="1">
       <div class="pad bg-paper">
         <div class="kicker">STEP 2 · 묻기</div>
-        <h2 class="htitle big">Buds Q를 실행해 물어보면, 버즈가 알아서 정리합니다</h2>
+        <h2 class="htitle big">Buds Q 실행부터 전송 준비까지</h2>
         <p class="sub lt" style="margin-top:.8cqw;"><span style="color:#1C6E8C;font-weight:700;">Buds Q</span>가 실행되면 "띵" 소리와 함께 질문을 받기 시작하고, 말이 끝나면 스스로 멈춘 뒤 → 들은 소리들을 작게 압축해 → 하나의 봉투로 묶습니다.</p>
 
-        <div class="flowrow" style="margin-top:1.5cqw;">
+        <div class="flowrow s2flow" style="margin-top:2cqw;">
           <div class="card lt rel">
             <span class="num">1</span>
             <div class="ico onpaper"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg></div>
             <div class="ctitle">Buds Q 실행</div>
+            <span class="tag lt" style="margin:.7cqw 0;">Buds Q Trigger</span>
             <p class="ctext">Buds Q를 실행하면 "지금부터 들을게" 신호로 짧은 알림음이 울리고, 버즈가 질문을 받을 준비를 마칩니다.</p>
-            <span class="tag lt" style="margin-top:.85cqw;">Buds Q Trigger</span>
           </div>
           <div class="card lt rel">
             <span class="num">2</span>
             <div class="ico onpaper"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.5c-1.5-2-4-2.5-5.5-1.5C5 5 4.5 7 5 9c.4 1.6 0 3 .5 5 .4 1.6 1.6 2.5 2.5 1.5.8-.9.5-2.5 1-3.5.4-.8 1.2-.8 1.6 0 .5 1 .2 2.6 1 3.5.9 1 2.1.1 2.5-1.5.5-2 .1-3.4.5-5 .5-2 0-4-1.5-5-1.5-1-4-.5-5.5 1.5z"/></svg></div>
             <div class="ctitle">말 끝 자동 감지</div>
-            <p class="ctext">소리가 아니라 '턱뼈 진동'을 보기 때문에, 시끄러운 곳에서도 말이 끝난 순간을 정확히 잡아 스스로 멈춥니다.</p>
-            <span class="tag lt" style="margin-top:.85cqw;">Voice Detect · VPU</span>
+            <span class="tag lt" style="margin:.7cqw 0;">VAD · Voice Detect · VPU</span>
+            <p class="ctext">소리가 아니라 '턱뼈 진동'을 보기 때문에, 시끄러운 곳에서도 말이 끝난 순간(VAD)을 정확히 잡아 스스로 멈춥니다.</p>
           </div>
           <div class="card lt rel">
             <span class="num">3</span>
             <div class="ico onpaper"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg></div>
             <div class="ctitle">한 봉투로 포장</div>
+            <span class="tag lt" style="margin:.7cqw 0;">SBAP / 자체 프로토콜</span>
             <p class="ctext">내 질문 + 듣던 소리 + 주변음을 한 묶음으로 포장하고 "BudsAI한테 물어봐 줘" 쪽지를 붙입니다.</p>
-            <span class="tag lt" style="margin-top:.85cqw;">SBAP · 자체 프로토콜</span>
           </div>
-        </div>
-
-        <div class="band">
-          <div class="lead">
-            <h3>
-              <svg viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/><path d="M12 7v5l4 2"/></svg>
-              작게 압축하기 — 6MB를 200KB로
-            </h3>
-            <p class="bt">귀에 스치는 짧은 소리도 숫자로는 거대합니다. 버즈에 이미 들어있는 압축기(LC3)가 '귀에 들리는 부분만' 남겨, 한 요청을 약 1/30 크기로 줄입니다. 덕분에 블루투스로 2초 만에 보낼 수 있습니다.</p>
-            <span class="tag dk bandtag" style="margin-top:.9cqw;">LC3 24kbps · LE Audio</span>
-          </div>
-          <div class="stat orig"><div class="lbl">원본</div><div class="big">≈6MB</div></div>
-          <div class="arrowSm">›</div>
-          <div class="stat comp"><div class="lbl">압축 후</div><div class="big">200KB</div></div>
         </div>
         <div class="pageno">2 / 4</div>
       </div>
@@ -277,41 +312,73 @@
     <section class="slide light" data-i="2">
       <div class="pad bg-paper">
         <div class="kicker">STEP 3 · 보내기</div>
-        <h2 class="htitle big">어떤 기기든 '통로'로 빌려, 아무도 못 여는 봉투로 보냅니다</h2>
-        <p class="sub lt" style="margin-top:.8cqw;">갤럭시 폰뿐 아니라 노트북·차량·TV 등 인터넷이 되는 아무 기기나 잠깐 통로로 빌립니다. 중간 기기는 봉투를 '전달'만 할 뿐, 안의 내용은 끝까지 볼 수 없습니다.</p>
+        <h2 class="htitle big">기기에 따라 두 경로로 안전하게 전송합니다</h2>
+        <p class="sub lt" style="margin-top:.8cqw;">갤럭시 폰이면 블루투스로 곧장 보내고, 노트북·차량·TV 등은 인터넷 통로만 잠깐 빌립니다. 어느 쪽이든 중간 기기는 봉투 안 내용을 끝까지 볼 수 없습니다.</p>
 
-        <div class="chain">
-          <div class="node lt">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
-            <div class="nm">버즈</div>
-            <div class="nd">포장 · 봉인 · 전송</div>
-            <span class="tag lt">Capture · LC3</span>
-          </div>
-          <div class="link">
-            <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <div class="ar"></div>
-          </div>
-          <div class="node lt">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg></div>
-            <div class="nm">중간 기기</div>
-            <div class="nd">겉봉투만 전달 (내용 못 봄)</div>
-            <span class="tag lt">BT Tethering · BNEP·NAT</span>
-          </div>
-          <div class="link">
-            <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <div class="ar"></div>
-          </div>
-          <div class="node dk">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
-            <div class="nm">BudsAI 서버</div>
-            <div class="nd">봉투를 열어 처리</div>
-            <span class="tag dk">AI Orchestrator</span>
-          </div>
+        <div class="forkwrap">
+          <svg class="fork" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#22D3EE"/>
+              </marker>
+            </defs>
+            <!-- connector paths: buds(225,150) -> galaxy(500,72) / host(500,228) -> server(775,150) -->
+            <path d="M225,150 C320,150 360,72 470,72" fill="none" stroke="#22D3EE" stroke-width="3" marker-end="url(#ah)"/>
+            <path d="M225,150 C320,150 360,228 470,228" fill="none" stroke="#22D3EE" stroke-width="3" marker-end="url(#ah)"/>
+            <path d="M650,72 C740,72 690,150 745,150" fill="none" stroke="#22D3EE" stroke-width="3" marker-end="url(#ah)"/>
+            <path d="M650,228 C740,228 690,150 745,150" fill="none" stroke="#22D3EE" stroke-width="3" marker-end="url(#ah)"/>
+
+            <!-- edge labels -->
+            <g font-family="'IBM Plex Mono', monospace" font-size="14" font-weight="600" fill="#1C6E8C">
+              <rect x="330" y="56" width="118" height="24" rx="12" fill="#EAF0FF" stroke="#22D3EE"/>
+              <text x="389" y="72" text-anchor="middle">🔒 BT · SBAP</text>
+              <rect x="318" y="220" width="140" height="24" rx="12" fill="#EAF0FF" stroke="#22D3EE"/>
+              <text x="388" y="236" text-anchor="middle">🔒 BT Tethering</text>
+              <rect x="648" y="92" width="86" height="24" rx="12" fill="#EAF0FF" stroke="#22D3EE"/>
+              <text x="691" y="108" text-anchor="middle">🔒 mTLS</text>
+              <rect x="648" y="184" width="86" height="24" rx="12" fill="#EAF0FF" stroke="#22D3EE"/>
+              <text x="691" y="200" text-anchor="middle">🔒 mTLS</text>
+            </g>
+
+            <!-- BUDS node (fixed, left) -->
+            <g>
+              <rect x="40" y="96" width="186" height="108" rx="16" fill="#fff" stroke="#D6DEF5" stroke-width="1.5"/>
+              <text x="133" y="138" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="22" font-weight="700" fill="#10162F">버즈</text>
+              <text x="133" y="162" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="13" fill="#5A6595">포장 · 봉인 · 전송</text>
+              <rect x="73" y="174" width="120" height="22" rx="11" fill="#EAF0FF" stroke="#22D3EE"/>
+              <text x="133" y="189" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="12" font-weight="600" fill="#1C6E8C">Capture · LC3</text>
+            </g>
+
+            <!-- GALAXY node (top path) -->
+            <g>
+              <rect x="470" y="26" width="180" height="92" rx="14" fill="#F4F7FF" stroke="#22D3EE" stroke-width="1.5"/>
+              <text x="560" y="58" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="18" font-weight="700" fill="#1C6E8C">📱 갤럭시 폰</text>
+              <text x="560" y="79" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="12.5" fill="#5A6595">블루투스로 곧장 전달</text>
+              <rect x="492" y="90" width="136" height="20" rx="10" fill="#EAF0FF" stroke="#22D3EE"/>
+              <text x="560" y="104" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="11" font-weight="600" fill="#1C6E8C">Bluetooth · SBAP</text>
+            </g>
+
+            <!-- HOST node (bottom path) -->
+            <g>
+              <rect x="470" y="182" width="180" height="92" rx="14" fill="#F4F7FF" stroke="#D6DEF5" stroke-width="1.5"/>
+              <text x="560" y="212" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="16" font-weight="700" fill="#36406B">💻 호스트</text>
+              <text x="560" y="231" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="11.5" fill="#5A6595">iOS·노트북·TV · 통로만 빌림</text>
+              <rect x="486" y="244" width="148" height="20" rx="10" fill="#EAF0FF" stroke="#22D3EE"/>
+              <text x="560" y="258" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="10.5" font-weight="600" fill="#1C6E8C">BT Tethering · BNEP·NAT</text>
+            </g>
+
+            <!-- SERVER node (fixed, right) -->
+            <g>
+              <rect x="775" y="96" width="186" height="108" rx="16" fill="#0E1330" stroke="#0E1330"/>
+              <text x="868" y="138" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="20" font-weight="700" fill="#fff">BudsAI 서버</text>
+              <text x="868" y="162" text-anchor="middle" font-family="'Noto Sans KR',sans-serif" font-size="13" fill="#CADCFC">봉투 열어 처리</text>
+              <rect x="808" y="174" width="120" height="22" rx="11" fill="#24306A" stroke="#5EEAD4"/>
+              <text x="868" y="189" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="12" font-weight="600" fill="#5EEAD4">Orchestrator</text>
+            </g>
+          </svg>
         </div>
-        <div class="seal">🔒 봉인된 내용물은 통로를 지나는 내내 '안 열림'</div>
 
-        <div class="secttitle">안전을 지키는 3가지 장치</div>
-        <div class="pillars">
+        <div class="pillars" style="margin-top:.7cqw;">
           <div class="pillar">
             <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><b>정품만 통과</b></div>
             <span class="tag lt">Knox Attestation 기반</span>
@@ -319,7 +386,7 @@
           </div>
           <div class="pillar">
             <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="#0E1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><b>양방향 신원 확인</b></div>
-            <span class="tag lt">mTLS · PKI 인증서</span>
+            <span class="tag lt">mTLS</span>
             <p>서버와 버즈가 서로 "너 진짜 맞아?"를 확인합니다. 버즈는 출고 때 받은 '디지털 신분증'으로 자신을 증명합니다.</p>
           </div>
           <div class="pillar">
@@ -328,7 +395,7 @@
             <p>신분증의 비밀 키는 칩 안 금고에 넣고 '쓰기만, 꺼내기는 불가'로 잠급니다. 칩을 뜯어도 키는 새어나가지 않습니다.</p>
           </div>
         </div>
-        <div class="pageno">3 / 4</div>
+        <div class="pageno" style="bottom:1cqw;">3 / 4</div>
       </div>
     </section>
 
@@ -336,7 +403,7 @@
     <section class="slide dark" data-i="3">
       <div class="pad bg-navy">
         <div class="kicker">STEP 4 · 답하기</div>
-        <h2 class="htitle big" style="color:#fff;">서버는 '똑똑한 교통정리'만, 두뇌는 최고의 AI에게 빌립니다</h2>
+        <h2 class="htitle big" style="color:#fff;">서버는 분석을 위임하고, 결과를 음성으로 전달합니다</h2>
         <p class="sub dk" style="margin-top:.8cqw;">BudsAI 서버는 직접 분석하지 않습니다. 받은 소리를 정리해 알맞은 곳으로 보내고(교통정리), 실제 이해와 답변은 최고의 AI에게 맡깁니다. 그래서 늘 최신 성능을 빌려 쓸 수 있습니다.</p>
 
         <div class="grid4" style="margin-top:1.5cqw;">
